@@ -1,0 +1,79 @@
+﻿@using System.ServiceModel.Configuration
+@model IEnumerable<EndToEnd.Models.Session>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vogel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vogel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beschrijving)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            <img class="resize" src="~/Images/@Html.ValueFor(modelItem=>item.ImageUrl)"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @*<input type="button" value="+" onclick="btnplus()" style="width: 60px; height:60px; font-size:30px; border-radius:8px"/>*@
+            <a href="@Url.Action("AddOne", "Vogel", new {id = Model.Id})" style="width: 60px; height:60px; font-size:30px; border-radius:8px"><i class="glyphicon glyphicon-plus"></i></a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count, new {id="count"})
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+    <script type="text/javascript">
+        var count = 0;
+        function teller() {
+            count += 1;
+            document.getElementById("count").innerHTML = count;
+
+        }
+    </script>>
+
+</table>
